@@ -38,7 +38,28 @@ document.addEventListener('DOMContentLoaded', () => {
     videoListElement.innerHTML = '';
     console.log('Displaying videos:', videos.length);
 
-    const createVideoCard = (video: VideoFile): HTMLDivElement => {
+    videoListElement.append(...videos.map((video) => createVideoCard(video)));
+  }
+  
+  function playVideo(path: string) {
+    console.log('Playing video:', path);
+    if (!playerElement || !videoPlayerElement) return;
+    
+    playerElement.src = `file://${path}`;
+    videoPlayerElement.classList.remove('hidden');
+    playerElement.play();
+  }
+  
+  closePlayerBtn?.addEventListener('click', () => {
+    if (!playerElement || !videoPlayerElement) return;
+    
+    playerElement.pause();
+    playerElement.src = '';
+    videoPlayerElement.classList.add('hidden');
+  });
+
+  // Create Video Card
+  const createVideoCard = (video: VideoFile): HTMLDivElement => {
     const el = <T extends keyof HTMLElementTagNameMap>(
       tag: T,
       classes?: string,
@@ -66,25 +87,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return videoCard;
   };
-
-    videoListElement.append(...videos.map((video) => createVideoCard(video)));
-
-  }
-  
-  function playVideo(path: string) {
-    console.log('Playing video:', path);
-    if (!playerElement || !videoPlayerElement) return;
-    
-    playerElement.src = `file://${path}`;
-    videoPlayerElement.classList.remove('hidden');
-    playerElement.play();
-  }
-  
-  closePlayerBtn?.addEventListener('click', () => {
-    if (!playerElement || !videoPlayerElement) return;
-    
-    playerElement.pause();
-    playerElement.src = '';
-    videoPlayerElement.classList.add('hidden');
-  });
 });
