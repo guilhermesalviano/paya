@@ -38,47 +38,37 @@ document.addEventListener('DOMContentLoaded', () => {
     videoListElement.innerHTML = '';
     console.log('Displaying videos:', videos.length);
     
-    videos.forEach(video => {
-      const videoCard = document.createElement('div');
-      videoCard.className = 'bg-white rounded-lg shadow overflow-hidden';
-      
-      const thumbnailContainer = document.createElement('div');
-      thumbnailContainer.className = 'bg-gray-200 aspect-video flex items-center justify-center';
-      
-      const videoIcon = document.createElement('div');
-      videoIcon.className = 'text-gray-500 text-5xl';
-      videoIcon.innerHTML = '🎬';
-      
+    const createVideoCard = (video: VideoFile) => {
+      const el = <T extends keyof HTMLElementTagNameMap>(
+        tag: T,
+        classes?: string,
+        text?: string
+      ): HTMLElementTagNameMap[T] => {
+        const element = document.createElement(tag);
+        if (classes) element.className = classes;
+        if (text) element.textContent = text;
+        return element;
+      };
+
+      const videoCard = el('div', 'bg-white rounded-lg shadow overflow-hidden');
+      const thumbnailContainer = el('div', 'bg-gray-200 aspect-video flex items-center justify-center');
+      const videoIcon = el('div', 'text-gray-500 text-5xl', '🎬');
+      const infoContainer = el('div', 'p-4');
+      const videoName = el('h3', 'font-medium text-gray-900 mb-1 truncate', video.name);
+      const videoType = el('p', 'text-sm text-gray-500', `Type: ${video.type}`);
+      const playButton = el('button', 'mt-3 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition', 'Play Video');
+
+      playButton.addEventListener('click', () => playVideo(video.path));
+
       thumbnailContainer.appendChild(videoIcon);
-      
-      const infoContainer = document.createElement('div');
-      infoContainer.className = 'p-4';
-      
-      const videoName = document.createElement('h3');
-      videoName.className = 'font-medium text-gray-900 mb-1 truncate';
-      videoName.textContent = video.name;
-      
-      const videoType = document.createElement('p');
-      videoType.className = 'text-sm text-gray-500';
-      videoType.textContent = `Type: ${video.type}`;
-      
-      infoContainer.appendChild(videoName);
-      infoContainer.appendChild(videoType);
-      
-      const playButton = document.createElement('button');
-      playButton.className = 'mt-3 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition';
-      playButton.textContent = 'Play Video';
-      playButton.addEventListener('click', () => {
-        playVideo(video.path);
-      });
-      
-      infoContainer.appendChild(playButton);
-      
-      videoCard.appendChild(thumbnailContainer);
-      videoCard.appendChild(infoContainer);
-      
-      videoListElement.appendChild(videoCard);
-    });
+      infoContainer.append(videoName, videoType, playButton);
+      videoCard.append(thumbnailContainer, infoContainer);
+
+      return videoCard;
+    };
+
+    videoListElement.append(...videos.map(createVideoCard));
+
   }
   
   function playVideo(path: string) {
