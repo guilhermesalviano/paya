@@ -28,16 +28,17 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/electron": "^1.4.38",
     "@types/node": "^22.13.10",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
+    "electron": "^35.0.1",
     "electron-builder": "^25.1.8",
+    "electron-reload": "^2.0.0-alpha.1",
     "nodemon": "^3.1.9",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.0.14",
     "ts-node": "^10.9.2",
-    "electron": "^35.0.1",
-    "electron-reload": "^2.0.0-alpha.1",
     "typescript": "^5.8.2"
   }
 }
