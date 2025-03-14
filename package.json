@@ -1,0 +1,43 @@
+{
+  "name": "electron-video",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "npm run build && electron .",
+    "dev": "concurrently \"npm run watch:ts\" \"npm run watch:css\" \"npm run start:electron\"",
+    "build": "tsc && npm run build:css",
+    "build:css": "tailwindcss -i ./src/css/style.css -o ./renderer/css/style.css",
+    "watch:ts": "tsc -w",
+    "watch:css": "tailwindcss -i ./src/css/style.css -o ./renderer/css/style.css --watch",
+    "start:electron": "nodemon --exec electron . --watch dist/",
+    "package": "electron-builder"
+  },
+  "build": {
+    "appId": "com.example.videobrowser",
+    "productName": "Video Browser",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "renderer/**/*"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.2",
+    "electron-builder": "^25.1.8",
+    "nodemon": "^3.1.9",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.14",
+    "ts-node": "^10.9.2",
+    "electron": "^35.0.1",
+    "electron-reload": "^2.0.0-alpha.1",
+    "typescript": "^5.8.2"
+  }
+}
