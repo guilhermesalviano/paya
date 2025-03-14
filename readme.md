@@ -1,4 +1,4 @@
-# Video Folder Manager (Electron Desktop App)
+# PAYA (Video Folder Manager in Electron)
 
 A cross-platform desktop application built with Electron that allows users to manage and interact with video files in a specified folder. Easily organize, preview, and process your video collection directly from your desktop.
 
@@ -9,7 +9,6 @@ A cross-platform desktop application built with Electron that allows users to ma
 ### Prerequisites
 - Node.js v18+
 - npm v9+
-- FFmpeg (for video processing)
 
 ### Quick Start
 ```bash
