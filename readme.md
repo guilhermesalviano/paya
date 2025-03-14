@@ -1,6 +1,6 @@
-# PAYA (Video Folder Manager in Electron)
+# PAYA (Video Browser in Electron)
 
-A cross-platform desktop application built with Electron that allows users to manage and interact with video files in a specified folder. Easily organize, preview, and process your video collection directly from your desktop.
+A cross-platform desktop application built with Electron that allows users to watch video files in a specified folder.
 
 ![App Screenshot](./screenshots/app-preview.png)
 
